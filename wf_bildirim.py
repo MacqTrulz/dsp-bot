@@ -4,6 +4,7 @@ DSP Dünya Durumu bildirimcisi  (v2)
 -----------------------------------
 warframestat.us API'sinden Warframe dünya durumunu okur ve Discord webhook'ları
 ile DSP sunucusuna Türkçe bildirim gönderir. GitHub Actions 15 dakikada bir çalıştırır.
+Her kanal kendi karakteriyle (ad + avatar, img/ klasöründen) mesaj atar.
 
   #dünya-panosu        Canlı pano (döngüler, Steel Path, Duviri, etkinlikler, sıfırlamalar)
   #baro-ki-teer        Baro yola çıkınca haber + gelince envanter            (@Baro Ki'Teer)
@@ -37,6 +38,17 @@ FOOTER = {"text": "DSP · Dünya Durumu"}
 ENDLESS = {"Survival", "Defense", "Interception", "Disruption", "Excavation", "Void Cascade",
            "Void Flood", "Void Armageddon", "Alchemy", "Mirror Defense"}
 DEFAULT_INV = "Orokin Catalyst,Orokin Reactor,Forma,Exilus,Wraith,Vandal"
+
+# Her kanalın kendi karakteri: webhook değişkeni -> (görünen ad, avatar dosyası)
+PERSONAS = {
+    "WH_PANO": ("DSP Cephalon", "pano"),
+    "WH_BARO": ("Relay Gözcüsü", "baro"),
+    "WH_SORTIE": ("Sortie Komutanı", "sortie"),
+    "WH_FISSURE": ("Void Tarayıcısı", "fissure"),
+    "WH_NIGHTWAVE": ("Sinyal Kulesi", "signal"),
+    "WH_HABER": ("DSP Haber Ağı", "haber"),
+}
+PERSONA_VERSION = 1
 
 # Açık dünya döngüleri: durum -> (Türkçe ad, emoji, süre sn, sonraki durum)
 CYCLES = {
@@ -106,11 +118,37 @@ def api(path):
     return data
 
 
+def img_base():
+    repo = env("GITHUB_REPOSITORY")
+    return env("IMG_BASE") or (f"https://raw.githubusercontent.com/{repo}/main/img" if repo else "")
+
+
+def persona(hook):
+    for var, (name, icon) in PERSONAS.items():
+        if hook and env(var) == hook:
+            base = img_base()
+            return name, (f"{base}/{icon}.png" if base else None)
+    return None, None
+
+
+def decorate(hook, embeds):
+    """İlk kutuya karakterin küçük resmini ekler."""
+    _, avatar = persona(hook)
+    if avatar and embeds and "thumbnail" not in embeds[0]:
+        embeds[0]["thumbnail"] = {"url": avatar}
+    return embeds
+
+
 def send(hook, embeds, role=None, text=None):
     if not hook:
         return None
     content = " ".join(x for x in (f"<@&{role}>" if role else "", text or "") if x)
-    body = {"embeds": embeds, "allowed_mentions": {"parse": [], "roles": [role] if role else []}}
+    body = {"embeds": decorate(hook, embeds), "allowed_mentions": {"parse": [], "roles": [role] if role else []}}
+    name, avatar = persona(hook)
+    if name:
+        body["username"] = name
+    if avatar:
+        body["avatar_url"] = avatar
     if content:
         body["content"] = content
     code, data = http("POST", hook + ("&" if "?" in hook else "?") + "wait=true", body)
@@ -121,13 +159,20 @@ def send(hook, embeds, role=None, text=None):
 
 
 def edit(hook, msg_id, embeds):
-    code, _ = http("PATCH", f"{hook.split('?')[0]}/messages/{msg_id}", {"embeds": embeds})
+    code, _ = http("PATCH", f"{hook.split('?')[0]}/messages/{msg_id}", {"embeds": decorate(hook, embeds)})
     return code == 200
+
+
+def delete(hook, msg_id):
+    http("DELETE", f"{hook.split('?')[0]}/messages/{msg_id}")
 
 
 def panel(state, key, hook, embeds):
     """Tek mesajı sürekli günceller; mesaj silinmişse yenisini atar."""
     msg = state.get(key)
+    if msg and state.get("persona_v") != PERSONA_VERSION:
+        delete(hook, msg)  # eski kimlikli paneli kaldır, yenisi aşağıda atılır
+        msg = None
     if msg and edit(hook, msg, embeds):
         return
     new_id = send(hook, embeds)
@@ -373,7 +418,7 @@ def fissures(state):
     fs = api("fissures")
     if not hook or fs is None:
         return
-    fs = [f for f in fs if ts(f["expiry"]) > now()]
+    fs = [f for f in fs if ts(f["expiry"]) > now() + 300]  # 5 dk içinde kapanacakları gösterme
     fs.sort(key=lambda f: (f.get("tierNum", 9), f["expiry"]))
 
     def block(items):
@@ -454,6 +499,7 @@ def main():
             print(f"✓ {name}")
         except Exception as e:
             print(f"! {name} hata: {type(e).__name__}: {e}")
+    state["persona_v"] = PERSONA_VERSION
     if json.dumps(state, sort_keys=True) != before:
         STATE_FILE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
         print("Durum dosyası güncellendi.")
