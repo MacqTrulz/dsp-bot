@@ -7,10 +7,10 @@
     "6aed0df6924231c2ac280f51"
   ],
   "fis_seen": [
-    "6af1e0e215a1786b5952e471",
-    "6af1e7ea0ee62e6cb113176c"
+    "6af1e7ea0ee62e6cb113176c",
+    "6af1faaa506af9c5e15ced33"
   ],
-  "fissure_msg": "1569388112650440720",
+  "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af04a7a2607502394909525",
     "6af0e8aeb24077aba59176a4",
@@ -45,6 +45,7 @@
     "1794787200000seasonweeklypermanentkilleximus14",
     "1794787200000seasonweeklytoashes"
   ],
-  "pano_msg": "1569393944725426282",
-  "sortie": "6af0a70e85c86d8d6c1c0185"
+  "pano_msg": "1569398041872437281",
+  "persona_v": 1,
+  "sortie": "6af1f88e6675a87367d7a113"
 }
