@@ -2,7 +2,7 @@ name: DSP Dünya Durumu
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # 15 dakikada bir (GitHub bazen birkaç dakika geciktirir)
+    - cron: "7,22,37,52 * * * *"   # 15 dakikada bir, yoğun olmayan dakikalarda (tam saat başı GitHub'da atlanabiliyor)
   workflow_dispatch: {}       # Actions sekmesinden elle çalıştırmak için
 
 permissions:
