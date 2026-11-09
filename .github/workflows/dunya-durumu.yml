@@ -1,0 +1,42 @@
+name: DSP Dünya Durumu
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # 15 dakikada bir (GitHub bazen birkaç dakika geciktirir)
+  workflow_dispatch: {}       # Actions sekmesinden elle çalıştırmak için
+
+permissions:
+  contents: write             # state.json dosyasını kaydedebilmek için
+
+concurrency:
+  group: dunya-durumu
+  cancel-in-progress: false
+
+jobs:
+  bildir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Bildirimleri gönder
+        env:
+          WH_BARO: ${{ secrets.WH_BARO }}
+          WH_SORTIE: ${{ secrets.WH_SORTIE }}
+          WH_FISSURE: ${{ secrets.WH_FISSURE }}
+          WH_NIGHTWAVE: ${{ secrets.WH_NIGHTWAVE }}
+          ROLE_BARO: ${{ vars.ROLE_BARO }}
+          ROLE_SORTIE: ${{ vars.ROLE_SORTIE }}
+          ROLE_NIGHTWAVE: ${{ vars.ROLE_NIGHTWAVE }}
+        run: python wf_bildirim.py
+
+      - name: Durumu kaydet
+        run: |
+          git config user.name "dsp-dunya-durumu"
+          git config user.email "dsp-dunya-durumu@users.noreply.github.com"
+          git add state.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "Dünya durumu güncellendi" && git push)
