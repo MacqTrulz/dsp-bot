@@ -57,6 +57,8 @@ CYCLES = {
     "cambionCycle": ("Necralisk · Cambion Drift", {"fass": ("Fass", "🟠", 6000, "vome"), "vome": ("Vome", "🔵", 3000, "fass")}),
     "zarimanCycle": ("Zariman",                   {"corpus": ("Corpus", "🔷", 9000, "grineer"), "grineer": ("Grineer", "🟥", 9000, "corpus")}),
 }
+# Panoda saatleriyle listelenecek önemli dönem ve kaç pencere gösterileceği
+CYCLE_WINDOWS = {"cetusCycle": ("night", 2), "vallisCycle": ("warm", 3), "cambionCycle": ("vome", 2)}
 
 
 # --------------------------------------------------------------------------- yardımcılar
@@ -228,6 +230,19 @@ def dunya_panosu(state):
         name, emo, _, nxt = states[st]
         extra = " · **Eidolon avı zamanı!**" if path == "cetusCycle" and st == "night" else ""
         lines.append(f"{emo} **{title}:** {name} — {states[nxt][0]} {tag(exp)}{extra}")
+        # Sonraki pencereler (mutlak saat): pano 15 dk'da bir yenilense de geçerli kalır
+        key, count = CYCLE_WINDOWS.get(path, (None, 0))
+        if key:
+            wins, s, start, end = [], st, None, exp
+            for _ in range(count * 2 + 2):
+                if s == key:
+                    wins.append(("şimdi" if start is None else tag(start, "t")) + "–" + tag(end, "t"))
+                    if len(wins) == count:
+                        break
+                s = states[s][3]
+                start, end = end, end + states[s][2]
+            k_name, k_emo = states[key][0], states[key][1]
+            lines.append(f"  {k_emo} {k_name}: " + " · ".join(wins))
     emb1 = {"title": "🌍 Açık Dünya Döngüleri", "color": CYAN,
             "description": "\n".join(lines) or "_Veri alınamadı._"}
 
