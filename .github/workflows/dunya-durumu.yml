@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {}       # Actions sekmesinden elle çalıştırmak için
 
 permissions:
-  contents: write             # state.json dosyasını kaydedebilmek için
+  contents: write             # state.json ve avatarları kaydedebilmek için
 
 concurrency:
   group: dunya-durumu
@@ -17,11 +17,26 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+
+      - name: Git kimliği
+        run: |
+          git config user.name "dsp-dunya-durumu"
+          git config user.email "dsp-dunya-durumu@users.noreply.github.com"
+
+      - name: Avatarları üret (sadece eksikse)
+        run: |
+          if [ ! -f img/haber.png ]; then
+            sudo apt-get install -y -qq librsvg2-bin >/dev/null
+            python tools/avatar_uret.py
+            for f in img/*.svg; do rsvg-convert -w 256 -h 256 "$f" -o "${f%.svg}.png"; done
+            git add img/*.png img/*.svg
+            git commit -m "Bot avatarları üretildi" && git pull --rebase -q && git push
+          fi
 
       - name: Bildirimleri gönder
         env:
@@ -43,7 +58,5 @@ jobs:
 
       - name: Durumu kaydet
         run: |
-          git config user.name "dsp-dunya-durumu"
-          git config user.email "dsp-dunya-durumu@users.noreply.github.com"
           git add state.json 2>/dev/null || true
           git diff --cached --quiet || (git commit -m "Dünya durumu güncellendi" && git pull --rebase -q && git push)
