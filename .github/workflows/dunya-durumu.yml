@@ -25,13 +25,20 @@ jobs:
 
       - name: Bildirimleri gönder
         env:
+          WH_PANO: ${{ secrets.WH_PANO }}
           WH_BARO: ${{ secrets.WH_BARO }}
           WH_SORTIE: ${{ secrets.WH_SORTIE }}
           WH_FISSURE: ${{ secrets.WH_FISSURE }}
           WH_NIGHTWAVE: ${{ secrets.WH_NIGHTWAVE }}
+          WH_HABER: ${{ secrets.WH_HABER }}
           ROLE_BARO: ${{ vars.ROLE_BARO }}
           ROLE_SORTIE: ${{ vars.ROLE_SORTIE }}
           ROLE_NIGHTWAVE: ${{ vars.ROLE_NIGHTWAVE }}
+          ROLE_FARM: ${{ vars.ROLE_FARM }}
+          ROLE_FISSURE: ${{ vars.ROLE_FISSURE }}
+          ROLE_HABER: ${{ vars.ROLE_HABER }}
+          FISSURE_TIERS: ${{ vars.FISSURE_TIERS }}
+          INVASION_ITEMS: ${{ vars.INVASION_ITEMS }}
         run: python wf_bildirim.py
 
       - name: Durumu kaydet
@@ -39,4 +46,4 @@ jobs:
           git config user.name "dsp-dunya-durumu"
           git config user.email "dsp-dunya-durumu@users.noreply.github.com"
           git add state.json 2>/dev/null || true
-          git diff --cached --quiet || (git commit -m "Dünya durumu güncellendi" && git push)
+          git diff --cached --quiet || (git commit -m "Dünya durumu güncellendi" && git pull --rebase -q && git push)
