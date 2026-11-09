@@ -1,7 +1,38 @@
 {
   "archon": "6af1097e05ec18308537fea6",
   "baro_upcoming": "5d1e07a0a38e4a4fdd7cefca:2026-11-13T14:00:00.000Z",
+  "ev_seen": [
+    "5c7cb0d00000000000000000",
+    "6ad0ea700000000000000000",
+    "6aed0df6924231c2ac280f51"
+  ],
+  "fis_seen": [
+    "6af1e0e215a1786b5952e471",
+    "6af1e7ea0ee62e6cb113176c"
+  ],
   "fissure_msg": "1569388112650440720",
+  "inv_seen": [
+    "6af04a7a2607502394909525",
+    "6af0e8aeb24077aba59176a4",
+    "6af18f1712084f6e46453eb4",
+    "6af1c757639c44fcbb699f18",
+    "6af1c757639c44fcbb699f19",
+    "6af1e5ce9e0c9b94094e1716"
+  ],
+  "news_seen": [
+    "62d31b87106360aa5703954d",
+    "67ae4e9fca4611344608d246",
+    "6824c85b6c30b5a005004018",
+    "69eb8206573bbe03e7010425",
+    "6ab3ed35a613c3ab7c0890d6",
+    "6ae0f647864e132d5108ebdc",
+    "6ae38ce21fd7fa768c07b085",
+    "6ae4dcf475ecd91eef022a01",
+    "6ae4e24388520b4da20190b2",
+    "6ae8c0b775cdda797f02c75c",
+    "6ae8f214852a7400340130f8",
+    "6ae9032c88ba88be7e038319"
+  ],
   "nw_seen": [
     "1794268800000seasondailykillenemieswithheadshots",
     "1794355200000seasondailytransmutemods",
@@ -14,5 +45,6 @@
     "1794787200000seasonweeklypermanentkilleximus14",
     "1794787200000seasonweeklytoashes"
   ],
+  "pano_msg": "1569393944725426282",
   "sortie": "6af0a70e85c86d8d6c1c0185"
 }
