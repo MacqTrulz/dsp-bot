@@ -3,19 +3,22 @@
   "baro_upcoming": "5d1e07a0a38e4a4fdd7cefca:2026-11-13T14:00:00.000Z",
   "ev_seen": [
     "5c7cb0d00000000000000000",
-    "6ad0ea700000000000000000",
-    "6aed0df6924231c2ac280f51"
+    "6ad0ea700000000000000000"
   ],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1794337056,
+      "msg": "1569775019029176412"
+    }
+  ],
+  "fis_seen": [
+    "6af34efa35dfc2f0b62cef94"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af04a7a2607502394909525",
     "6af1c757639c44fcbb699f18",
     "6af1dd9aca8692e160ce790f",
-    "6af2496a9e6650e1d699ab53",
-    "6af24f46a57abf331c42ea2e",
-    "6af24f46a57abf331c42ea2f",
     "6af274c6ec9230399897e922",
     "6af274c6ec9230399897e923",
     "6af274c6ec9230399897e924",
@@ -56,5 +59,5 @@
   ],
   "pano_msg": "1569398041872437281",
   "persona_v": 1,
-  "sortie": "6af1f88e6675a87367d7a113"
+  "sortie": "6af34a0ee0a6fd1f648db486"
 }
