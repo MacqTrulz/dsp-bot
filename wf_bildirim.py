@@ -169,7 +169,7 @@ def edit(hook, msg_id, embeds):
 
 
 def delete(hook, msg_id):
-    http("DELETE", f"{hook.split('?')[0]}/messages/{msg_id}")
+    return http("DELETE", f"{hook.split('?')[0]}/messages/{msg_id}")[0]
 
 
 def panel(state, key, hook, embeds):
@@ -493,10 +493,17 @@ def fissures(state):
     seen = set(state.get("fis_seen", []))
     good = [f for f in fs if f.get("isHard") and f.get("tier") in tiers and f.get("missionType") in ENDLESS
             and f["id"] not in seen]
+    keep = []
+    for a in state.get("fis_alerts", []):  # fissure'ı kapanan uyarıyı kanaldan kaldır
+        if a.get("exp", 0) > now() + 300 or delete(hook, a["msg"]) not in (200, 204, 404):
+            keep.append(a)
     if good and not first:
         lines = [f"**{f['tier']}** · {f['missionType']} · {f['node']} · {f['enemy']} · bitiş {t(f['expiry'])}" for f in good]
-        send(hook, [{"title": "🔔 Steel Path endless fissure açıldı", "color": RED, "footer": FOOTER,
-                     "description": "\n".join(lines)}], env("ROLE_FISSURE"))
+        mid = send(hook, [{"title": "🔔 Steel Path endless fissure açıldı", "color": RED, "footer": FOOTER,
+                           "description": "\n".join(lines)}], env("ROLE_FISSURE"))
+        if mid:
+            keep.append({"msg": mid, "exp": max(ts(f["expiry"]) for f in good)})
+    state["fis_alerts"] = keep
     state["fis_seen"] = sorted((seen | {f["id"] for f in good}) & {f["id"] for f in fs})
 
 
