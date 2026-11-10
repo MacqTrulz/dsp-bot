@@ -5,8 +5,15 @@
     "5c7cb0d00000000000000000",
     "6ad0ea700000000000000000"
   ],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1794358207,
+      "msg": "1569861852773617819"
+    }
+  ],
+  "fis_seen": [
+    "6af3ac428516e04d5c7183dd"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af04a7a2607502394909525",
@@ -38,6 +45,7 @@
     "1794355200000seasondailytransmutemods",
     "1794441600000seasondailyaimglide",
     "1794528000000seasondailykillenemieswithgas",
+    "1794614400000seasondailybuilderstouch",
     "1794787200000seasonweeklyhardcollectuniqueresources",
     "1794787200000seasonweeklyhardunlockrelics",
     "1794787200000seasonweeklyhorsingaround",
