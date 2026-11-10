@@ -57,8 +57,11 @@ CYCLES = {
     "cambionCycle": ("Necralisk · Cambion Drift", {"fass": ("Fass", "🟠", 6000, "vome"), "vome": ("Vome", "🔵", 3000, "fass")}),
     "zarimanCycle": ("Zariman",                   {"corpus": ("Corpus", "🔷", 9000, "grineer"), "grineer": ("Grineer", "🟥", 9000, "corpus")}),
 }
-# Panoda saatleriyle listelenecek önemli dönem ve kaç pencere gösterileceği
-CYCLE_WINDOWS = {"cetusCycle": ("night", 2), "vallisCycle": ("warm", 3), "cambionCycle": ("vome", 2)}
+# Panoda "Sonraki ..." satırıyla gösterilecek önemli dönem
+CYCLE_NEXT = {"cetusCycle": "night", "vallisCycle": "warm", "cambionCycle": "vome"}
+DUVIRI_ORDER = ["sorrow", "fear", "joy", "anger", "envy"]  # her biri 2 saat
+DUVIRI_NAMES = {"sorrow": "Hüzün", "fear": "Korku", "joy": "Neşe", "anger": "Öfke", "envy": "Kıskançlık"}
+TIERS = [("Lith", "🟤"), ("Meso", "⚪"), ("Neo", "🔵"), ("Axi", "🟡"), ("Requiem", "🔴"), ("Omnia", "🟣")]
 
 
 # --------------------------------------------------------------------------- yardımcılar
@@ -214,64 +217,84 @@ def archimedea_name(a):
 
 
 # --------------------------------------------------------------------------- 1) Dünya panosu
+def roll(states, st, exp):
+    """API eskiyse döngüyü şimdiki zamana kadar ileri sarar."""
+    while exp <= now():
+        st = states[st][3]
+        exp += states[st][2]
+    return st, exp
+
+
 def dunya_panosu(state):
     hook = env("WH_PANO")
     if not hook:
         return
-    lines = []
+    blocks = []
     for path, (title, states) in CYCLES.items():
         c = api(path)
         if not c or c.get("state") not in states:
             continue
-        st, exp = c["state"], ts(c["expiry"])
-        while exp <= now():  # API eskiyse döngüyü ileri sar
-            st = states[st][3]
-            exp += states[st][2]
+        st, exp = roll(states, c["state"], ts(c["expiry"]))
         name, emo, _, nxt = states[st]
-        extra = " · **Eidolon avı zamanı!**" if path == "cetusCycle" and st == "night" else ""
-        lines.append(f"{emo} **{title}:** {name} — {states[nxt][0]} {tag(exp)}{extra}")
-        # Sonraki pencereler (mutlak saat): pano 15 dk'da bir yenilense de geçerli kalır
-        key, count = CYCLE_WINDOWS.get(path, (None, 0))
-        if key:
-            wins, s, start, end = [], st, None, exp
-            for _ in range(count * 2 + 2):
-                if s == key:
-                    wins.append(("şimdi" if start is None else tag(start, "t")) + "–" + tag(end, "t"))
-                    if len(wins) == count:
-                        break
+        head = f"{emo} **{title}** — **{name.upper()}**"
+        if path == "cetusCycle" and st == "night":
+            head += " · 🎯 Eidolon avı zamanı!"
+        rows = [f"└ → {states[nxt][0]}: {tag(exp)} ({tag(exp, 't')})"]
+        key = CYCLE_NEXT.get(path)
+        if key and key == nxt:  # sıradaki dönem önemli olan: ne kadar süreceğini göster
+            rows.append(f"└ {states[key][0]} süresi: {tag(exp, 't')} – {tag(exp + states[key][2], 't')}")
+        elif key:  # şu an önemli dönemdeyiz: bir sonrakinin başlangıcı
+            s, start = nxt, exp
+            while True:
+                start += states[s][2]
                 s = states[s][3]
-                start, end = end, end + states[s][2]
-            k_name, k_emo = states[key][0], states[key][1]
-            lines.append(f"  {k_emo} {k_name}: " + " · ".join(wins))
+                if s == key:
+                    break
+            rows.append(f"└ Sonraki {states[key][0]}: {tag(start)} ({tag(start, 't')})")
+        blocks.append(head + "\n" + "\n".join(rows))
+
+    du = api("duviriCycle")
+    if du and du.get("state") in DUVIRI_ORDER:
+        i, exp = DUVIRI_ORDER.index(du["state"]), ts(du["expiry"])
+        while exp <= now():
+            i, exp = (i + 1) % len(DUVIRI_ORDER), exp + 7200
+        cur, nxt = DUVIRI_ORDER[i], DUVIRI_ORDER[(i + 1) % len(DUVIRI_ORDER)]
+        blocks.append(f"🌀 **Duviri** — **{DUVIRI_NAMES[cur].upper()}**\n"
+                      f"└ → {DUVIRI_NAMES[nxt]}: {tag(exp)} ({tag(exp, 't')})")
+
     emb1 = {"title": "🌍 Açık Dünya Döngüleri", "color": CYAN,
-            "description": "\n".join(lines) or "_Veri alınamadı._"}
+            "description": "\n\n".join(blocks) or "_Veri alınamadı._"}
 
     embs = [emb1]
-    sp = api("steelPath")
-    du = api("duviriCycle")
     info = []
+    wr = next_weekly_reset()
+    sp = api("steelPath")
     if sp and sp.get("currentReward"):
         rot = [r["name"] for r in sp.get("rotation") or []]
         cur = sp["currentReward"]["name"]
         nxt = rot[(rot.index(cur) + 1) % len(rot)] if cur in rot else None
-        info.append(f"🗡️ **Steel Path (Teshin):** {cur} ({sp['currentReward'].get('cost', '?')} Steel Essence)"
-                    + (f"\n  Sonraki hafta: {nxt}" if nxt else ""))
+        info.append(f"🗡️ **Steel Path (Teshin):** {cur} ({sp['currentReward'].get('cost', '?')} Steel Essence)\n"
+                    + (f"└ Sonraki: {nxt} · değişim {tag(wr)}" if nxt else f"└ Değişim {tag(wr)}"))
     if du:
         ch = {c.get("category"): c.get("choices") for c in du.get("choices") or []}
-        mood = {"sorrow": "Hüzün", "fear": "Korku", "joy": "Neşe", "anger": "Öfke", "envy": "Kıskançlık"}.get(du.get("state"), du.get("state", "?"))
-        info.append(f"🌀 **Duviri:** Ruh hali {mood} (değişim {t(du['expiry'])})")
-        if ch.get("normal"):
-            info.append(f"  Circuit Warframe'leri: {', '.join(ch['normal'])}")
-        if ch.get("hard"):
-            info.append(f"  Steel Path Circuit silahları: {', '.join(ch['hard'])}")
+        if ch.get("normal") or ch.get("hard"):
+            line = "🌀 **Duviri Circuit**"
+            if ch.get("normal"):
+                line += f"\n└ Warframe'ler: {', '.join(ch['normal'])}"
+            if ch.get("hard"):
+                line += f"\n└ Steel Path silahları: {', '.join(ch['hard'])}"
+            info.append(line)
     vt = api("voidTrader")
     if vt and vt.get("activation"):
         if ts(vt["activation"]) > now():
-            info.append(f"🛒 **Baro Ki'Teer:** {vt['location']} — geliş {t(vt['activation'])}")
+            info.append(f"🛒 **Baro Ki'Teer** — {vt['location']}\n"
+                        f"└ Geliş: {t(vt['activation'])} ({t(vt['activation'], 'f')})")
         else:
-            info.append(f"🛒 **Baro Ki'Teer:** {vt['location']} rölesinde — ayrılış {t(vt['expiry'])}")
-    info.append(f"🔄 **Günlük sıfırlama:** {tag(next_daily_reset())} · **Haftalık:** {tag(next_weekly_reset())}")
-    embs.append({"title": "📌 Bu Hafta", "color": GOLD, "description": cut("\n".join(info))})
+            info.append(f"🛒 **Baro Ki'Teer** — {vt['location']} rölesinde!\n"
+                        f"└ Ayrılış: {t(vt['expiry'])} ({t(vt['expiry'], 'f')})")
+    info.append(f"🔄 **Sıfırlamalar**\n└ Günlük: {tag(next_daily_reset())} ({tag(next_daily_reset(), 't')})"
+                f"\n└ Haftalık: {tag(wr)} ({tag(wr, 'f')})")
+    embs.append({"title": "📌 Bu Hafta", "color": GOLD, "description": cut("\n\n".join(info))})
 
     ev = [e for e in (api("events") or []) if e.get("expiry") and ts(e["expiry"]) > now()]
     if ev:
@@ -279,7 +302,8 @@ def dunya_panosu(state):
         for e in ev:
             prog = f" · %{e['health']:.0f}" if isinstance(e.get("health"), (int, float)) else ""
             where = e.get("node") or e.get("victimNode") or ""
-            el.append(f"• **{e.get('description', 'Etkinlik')}**{(' — ' + where) if where else ''}{prog} · bitiş {t(e['expiry'])}")
+            el.append(f"• **{e.get('description', 'Etkinlik')}**{(' — ' + where) if where else ''}{prog}\n"
+                      f"└ Bitiş: {t(e['expiry'])}")
         embs.append({"title": "🎉 Aktif Etkinlikler", "color": PURPLE, "description": cut("\n".join(el))})
     embs[-1]["footer"] = FOOTER
     embs[0]["description"] = f"Son güncelleme: {tag(now())}\n\n" + embs[0]["description"]
@@ -439,8 +463,17 @@ def fissures(state):
     def block(items):
         if not items:
             return "_Şu an yok._"
-        return "\n".join(f"**{f['tier']}** · {f['missionType']} · {f['node']} · {f['enemy']} · {t(f['expiry'])}"
-                         for f in items)
+        out, known = [], {name for name, _ in TIERS}
+        groups = [(name, emo, [f for f in items if f.get("tier") == name]) for name, emo in TIERS]
+        groups.append(("Diğer", "▫️", [f for f in items if f.get("tier") not in known]))
+        for name, emo, grp in groups:
+            if not grp:
+                continue
+            out.append(f"{emo} **{name.upper()}**")
+            for f in sorted(grp, key=lambda f: f["expiry"]):
+                kind = "♾️" if f.get("missionType") in ENDLESS else "⚡"
+                out.append(f"{kind} {f['missionType']} · {f['node']} · {f['enemy']} · ⏳ {t(f['expiry'])}")
+        return "\n".join(out)
 
     embeds = [
         {"title": "💎 Void Fissure — Normal", "color": CYAN,
@@ -450,7 +483,8 @@ def fissures(state):
         {"title": "🚀 Void Storm — Railjack", "color": PURPLE,
          "description": cut(block([f for f in fs if f.get("isStorm")])), "footer": FOOTER},
     ]
-    embeds[0]["description"] = f"Son güncelleme: {tag(now())}\n\n" + embeds[0]["description"]
+    embeds[0]["description"] = (f"Son güncelleme: {tag(now())}\n♾️ sonsuz görev · ⚡ hızlı görev\n\n"
+                                + embeds[0]["description"])
     panel(state, "fissure_msg", hook, embeds)
 
     # değerli Steel Path endless fissure'ları için etiket
