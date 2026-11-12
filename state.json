@@ -5,14 +5,19 @@
     "5c7cb0d00000000000000000",
     "6ad0ea700000000000000000"
   ],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1794442924,
+      "msg": "1570227993278685326"
+    }
+  ],
+  "fis_seen": [
+    "6af4ef3b43274abe8ce16374"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af3c3eeef984fb9fb719cdc",
     "6af3ce7a47024b4cb8df7135",
-    "6af3dee36ac7f6c33fdde765",
-    "6af3e4be19d6b678e8575fca",
     "6af40b6adae2890b2e0260b8",
     "6af41aa6795c537316ef615d",
     "6af41aa6795c537316ef615e",
@@ -42,9 +47,9 @@
     "6af3664fe6a7874aad0fa539"
   ],
   "nw_seen": [
-    "1794441600000seasondailyaimglide",
     "1794528000000seasondailykillenemieswithgas",
     "1794614400000seasondailybuilderstouch",
+    "1794700800000seasondailytoppingoffthetank",
     "1794787200000seasonweeklyhardcollectuniqueresources",
     "1794787200000seasonweeklyhardunlockrelics",
     "1794787200000seasonweeklyhorsingaround",
