@@ -5,15 +5,21 @@
     "5c7cb0d00000000000000000",
     "6ad0ea700000000000000000"
   ],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1794574515,
+      "msg": "1570757762135105607"
+    }
+  ],
+  "fis_seen": [
+    "6af6eea250804c9f8e41e414"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af482f2cb35b8896a09fb8b",
     "6af5790a628b47f7fd492837",
     "6af5790a628b47f7fd492838",
     "6af5f1bef2ec668cebeb0d88",
-    "6af5f1bef2ec668cebeb0d89",
     "6af66b9e2646d77061488f93",
     "6af6ca8ad41eaf83f41ab66b"
   ],
