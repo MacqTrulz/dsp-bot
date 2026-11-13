@@ -7,22 +7,18 @@
   ],
   "fis_alerts": [
     {
-      "exp": 1794552348,
-      "msg": "1570661360390512692"
+      "exp": 1794562160,
+      "msg": "1570726298601656392"
     }
   ],
   "fis_seen": [
-    "6af6960a48ed79fc87707d04",
-    "6af6960a48ed79fc87707d05",
-    "6af6960a48ed79fc87707d06"
+    "6af6ca129d4243dab8e52677"
   ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
-    "6af3c3eeef984fb9fb719cdc",
     "6af482f2cb35b8896a09fb8b",
     "6af5790a628b47f7fd492837",
     "6af5790a628b47f7fd492838",
-    "6af5b5fa01b7dc2d3881d7e8",
     "6af5ce96c2ebf5e3c501b957",
     "6af5ce96c2ebf5e3c501b958",
     "6af5f1bef2ec668cebeb0d88",
