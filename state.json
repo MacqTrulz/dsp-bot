@@ -1,13 +1,22 @@
 {
   "archon": "6af1097e05ec18308537fea6",
   "baro_arrived": "5d1e07a0a38e4a4fdd7cefca:2026-11-13T14:00:00.000Z",
-  "baro_upcoming": "5d1e07a0a38e4a4fdd7cefca:2026-11-13T14:00:00.000Z",
+  "baro_upcoming": "5d1e07a0a38e4a4fdd7cefca:2026-11-27T14:00:00.000Z",
   "ev_seen": [
     "5c7cb0d00000000000000000",
     "6ad0ea700000000000000000"
   ],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1794760586,
+      "msg": "1571541681990410384"
+    }
+  ],
+  "fis_seen": [
+    "6af9c1360bff57cc3798ce4e",
+    "6af9c1360bff57cc3798ce4f",
+    "6af9c4428cdc0304df14cc1e"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af603536ce51edc3fd686f0",
@@ -19,7 +28,11 @@
     "6af91caefab9704256436232",
     "6af92e42ff691d48e7105a01",
     "6af97a6e0dbff97173b0e6c1",
-    "6af98c02662c4603a70dd7c7"
+    "6af98c02662c4603a70dd7c7",
+    "6af9b75e20ec711ae56ad322",
+    "6af9bd3a1ce6d882800ed5fc",
+    "6af9c4428cdc0304df14cc20",
+    "6af9c4428cdc0304df14cc21"
   ],
   "news_seen": [
     "62d31b87106360aa5703954d",
