@@ -6,16 +6,8 @@
     "5c7cb0d00000000000000000",
     "6ad0ea700000000000000000"
   ],
-  "fis_alerts": [
-    {
-      "exp": 1794858893,
-      "msg": "1571955707648016605"
-    }
-  ],
-  "fis_seen": [
-    "6afb4b6e76fec4e88189cf50",
-    "6afb4b6e76fec4e88189cf51"
-  ],
+  "fis_alerts": [],
+  "fis_seen": [],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af9bd3a1ce6d882800ed5fc",
