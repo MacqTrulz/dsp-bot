@@ -5,15 +5,22 @@
   "ev_seen": [
     "5c7cb0d00000000000000000"
   ],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1794952556,
+      "msg": "1572357023599698134"
+    }
+  ],
+  "fis_seen": [
+    "6afcb15248d3b682786c9bb7",
+    "6afcb15248d3b682786c9bb8",
+    "6afcb15248d3b682786c9bb9"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af9de0a305df76e0cc873f1",
     "6afaad76e9043f5bec0a73c7",
     "6afae6e219b73db30951a85b",
-    "6afb9db3a05d7bc86ab27e43",
-    "6afbcc929a17ccc418a9ff37",
     "6afbdbceee5d72423f58f13e",
     "6afbf46ada4489e81a6d5519",
     "6afc4fd22f1eb164f6ab0053",
@@ -22,7 +29,9 @@
     "6afc7d873985cdc0c206b50d",
     "6afc987a5cf7fdc5d019e336",
     "6afc987a5cf7fdc5d019e337",
-    "6afc9bff83e04c758b9e2701"
+    "6afc9bff83e04c758b9e2701",
+    "6afcaa0f74a1b1d5b4abfa45",
+    "6afcb94a89f53dd0ccbbfd1b"
   ],
   "news_seen": [
     "62d31b87106360aa5703954d",
@@ -40,7 +49,8 @@
     "6af73446ade96217ec08ccca",
     "6afb31ba32b621d2a00e3f80",
     "6afb3260a61debcdfb086292",
-    "6afb8dafe27a1414a20b7159"
+    "6afb8dafe27a1414a20b7159",
+    "6afca96c1c47e22ca901130a"
   ],
   "nw_seen": [
     "1794960000000seasondailydonateleverian",
