@@ -6,14 +6,22 @@
     "5c7cb0d00000000000000000",
     "6ad0ea700000000000000000"
   ],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1794880439,
+      "msg": "1572040063586402355"
+    }
+  ],
+  "fis_seen": [
+    "6afb98c73d9abcd8c8bed95b",
+    "6afb98c73d9abcd8c8bed95c",
+    "6afb98c73d9abcd8c8bed95d"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6af9bd3a1ce6d882800ed5fc",
     "6af9c4428cdc0304df14cc21",
     "6af9de0a305df76e0cc873f1",
-    "6afa7e97490acf42f0e8ce76",
     "6afaa2eb0cb1ecf0b40a0177",
     "6afaa2eb0cb1ecf0b40a0178",
     "6afaad76e9043f5bec0a73c7",
@@ -34,15 +42,15 @@
     "6ae9032c88ba88be7e038319",
     "6af3664fe6a7874aad0fa539",
     "6af73446ade96217ec08ccca",
-    "6af740966839dffb1208aa00",
     "6af7680d35eda17b6103faa3",
     "6afb31ba32b621d2a00e3f80",
-    "6afb3260a61debcdfb086292"
+    "6afb3260a61debcdfb086292",
+    "6afb8dafe27a1414a20b7159"
   ],
   "nw_seen": [
-    "1794873600000seasondailykillenemieswithfinishers",
     "1794960000000seasondailydonateleverian",
     "1795046400000seasondailytransmutemods",
+    "1795132800000seasondailycompletemissionprimary",
     "1795392000000seasonweeklyhardholdthemushrooms",
     "1795392000000seasonweeklyhardkillthumper",
     "1795392000000seasonweeklykillenemiesinmech",
