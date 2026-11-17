@@ -8,12 +8,14 @@
   ],
   "fis_alerts": [
     {
-      "exp": 1794901036,
-      "msg": "1572132104307740703"
+      "exp": 1794906289,
+      "msg": "1572153216114888747"
     }
   ],
   "fis_seen": [
-    "6afbef42bf6450dddd0a59bd"
+    "6afc0203a3a0c10913e7a865",
+    "6afc032eded004d4cd177cb5",
+    "6afc032eded004d4cd177cb6"
   ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
