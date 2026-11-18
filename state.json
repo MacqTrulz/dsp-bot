@@ -7,16 +7,11 @@
   ],
   "fis_alerts": [
     {
-      "exp": 1795026215,
-      "msg": "1572660361474347169"
-    },
-    {
       "exp": 1795027317,
       "msg": "1572665418764648744"
     }
   ],
   "fis_seen": [
-    "6afdda82484d13e062ffbbba",
     "6afddcdae41b2c32bebbf2be",
     "6afddcdae41b2c32bebbf2bf",
     "6afddcdae41b2c32bebbf2c0"
@@ -26,7 +21,6 @@
     "6afc522a14d7063f3b9607c1",
     "6afc7d873985cdc0c206b50c",
     "6afc987a5cf7fdc5d019e336",
-    "6afcef32ab69c93f11738ecc",
     "6afcf892c4f9e28f2cadb549",
     "6afd21969d1870c640f454ab",
     "6afd21969d1870c640f454ac"
