@@ -9,16 +9,11 @@
     {
       "exp": 1794963280,
       "msg": "1572387215030620211"
-    },
-    {
-      "exp": 1794961619,
-      "msg": "1572392285981778031"
     }
   ],
   "fis_seen": [
     "6afcdceb69bd37e44b9b1f4a",
-    "6afcdceb69bd37e44b9b1f4b",
-    "6afce19a7ef9bfa3ca6fa657"
+    "6afcdceb69bd37e44b9b1f4b"
   ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
@@ -37,7 +32,8 @@
     "6afcb94a89f53dd0ccbbfd1b",
     "6afcd0bad84e0229554b5567",
     "6afcdff64529a11b13968708",
-    "6afcdff64529a11b13968709"
+    "6afcdff64529a11b13968709",
+    "6afcef32ab69c93f11738ecc"
   ],
   "news_seen": [
     "62d31b87106360aa5703954d",
