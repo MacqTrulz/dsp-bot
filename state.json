@@ -9,17 +9,11 @@
     {
       "exp": 1795086421,
       "msg": "1572903987588374529"
-    },
-    {
-      "exp": 1795085246,
-      "msg": "1572905662428745839"
     }
   ],
   "fis_seen": [
-    "6afebddbd20f33d147b76adb",
     "6afebddbd20f33d147b76adc",
-    "6afebddbd20f33d147b76add",
-    "6afebff60939d914418845ef"
+    "6afebddbd20f33d147b76add"
   ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
