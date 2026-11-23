@@ -1,10 +1,17 @@
 {
-  "archon": "6afa43fe561ba20390474f32",
+  "archon": "6b037e7e26fb9a9750b1c4d8",
   "baro_arrived": "5d1e07a0a38e4a4fdd7cefca:2026-11-13T14:00:00.000Z",
   "baro_upcoming": "5d1e07a0a38e4a4fdd7cefca:2026-11-27T14:00:00.000Z",
   "ev_seen": [],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1795393549,
+      "msg": "1574215562194714685"
+    }
+  ],
+  "fis_seen": [
+    "6b036d26343ef2d88739d776"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6b00d9260a68872f699d9560",
@@ -32,16 +39,16 @@
     "6afca96c1c47e22ca901130a"
   ],
   "nw_seen": [
-    "1795392000000seasondailykillenemieswithheadshots",
-    "1795392000000seasonweeklyhardholdthemushrooms",
-    "1795392000000seasonweeklyhardkillthumper",
-    "1795392000000seasonweeklykillenemiesinmech",
-    "1795392000000seasonweeklypermanentcompletemissions15",
-    "1795392000000seasonweeklypermanentkillenemies15",
-    "1795392000000seasonweeklypermanentkilleximus15",
-    "1795392000000seasonweeklyskeletonsinthecloset",
     "1795478400000seasondailythepersonaltouch",
-    "1795564800000seasondailytwoforone"
+    "1795564800000seasondailytwoforone",
+    "1795651200000seasondailykillenemieswithgas",
+    "1795996800000seasonweeklybeastslayer",
+    "1795996800000seasonweeklycompleteclemmission",
+    "1795996800000seasonweeklyhardfriendssurvival",
+    "1795996800000seasonweeklyhardrailjackmissions",
+    "1795996800000seasonweeklypermanentcompletemissions16",
+    "1795996800000seasonweeklypermanentkillenemies16",
+    "1795996800000seasonweeklypermanentkilleximus16"
   ],
   "pano_msg": "1569398041872437281",
   "persona_v": 1,
