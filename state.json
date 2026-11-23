@@ -3,21 +3,12 @@
   "baro_arrived": "5d1e07a0a38e4a4fdd7cefca:2026-11-13T14:00:00.000Z",
   "baro_upcoming": "5d1e07a0a38e4a4fdd7cefca:2026-11-27T14:00:00.000Z",
   "ev_seen": [],
-  "fis_alerts": [
-    {
-      "exp": 1795438490,
-      "msg": "1574395457935908986"
-    }
-  ],
-  "fis_seen": [
-    "6b041bfecfd40bbfea676f25",
-    "6b041bfecfd40bbfea676f26"
-  ],
+  "fis_alerts": [],
+  "fis_seen": [],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6b025ab36d717b69f50f606d",
     "6b0321ebb355b885ee9cf568",
-    "6b032b4a1822b1860f1d08ac",
     "6b0380d7b7833e0c03ff9b18",
     "6b038dbbf7862807fba997e1",
     "6b03a8ae9e77cba37e3f24d7",
