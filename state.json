@@ -7,16 +7,21 @@
     {
       "exp": 1795436119,
       "msg": "1574370280086700033"
+    },
+    {
+      "exp": 1795438490,
+      "msg": "1574395457935908986"
     }
   ],
   "fis_seen": [
-    "6b04138eec1c8f1c05d848ff"
+    "6b04138eec1c8f1c05d848ff",
+    "6b041bfecfd40bbfea676f25",
+    "6b041bfecfd40bbfea676f26"
   ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6b025ab36d717b69f50f606d",
     "6b0321ebb355b885ee9cf568",
-    "6b0321ebb355b885ee9cf569",
     "6b032b4a1822b1860f1d08ac",
     "6b0380d7b7833e0c03ff9b18",
     "6b038dbbf7862807fba997e1",
@@ -30,7 +35,8 @@
     "6b03d40af34662b61d7df197",
     "6b03ea4fbc23b8921f9c3d5b",
     "6b03ea4fbc23b8921f9c3d5c",
-    "6b03ff67c57caa72d9057ed5"
+    "6b03ff67c57caa72d9057ed5",
+    "6b0423bb2122ffe202312555"
   ],
   "news_seen": [
     "62d31b87106360aa5703954d",
