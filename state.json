@@ -5,16 +5,11 @@
   "ev_seen": [],
   "fis_alerts": [
     {
-      "exp": 1795495925,
-      "msg": "1574628339715543175"
-    },
-    {
       "exp": 1795498150,
       "msg": "1574639699564306487"
     }
   ],
   "fis_seen": [
-    "6b05047e04e211f7ca60bbdf",
     "6b050e92dfca0fddedbfa59e",
     "6b050e92dfca0fddedbfa59f"
   ],
