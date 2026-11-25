@@ -7,17 +7,17 @@
   ],
   "fis_alerts": [
     {
-      "exp": 1795650641,
-      "msg": "1575281315077562460"
-    },
-    {
       "exp": 1795655893,
       "msg": "1575296415356166234"
+    },
+    {
+      "exp": 1795655628,
+      "msg": "1575297688717623367"
     }
   ],
   "fis_seen": [
-    "6b0759ae12a307d3090a1348",
-    "6b0772860889b7e0e8abd60f"
+    "6b0772860889b7e0e8abd60f",
+    "6b07733ac6375a8cacb9fad1"
   ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
@@ -48,6 +48,7 @@
     "1795651200000seasondailykillenemieswithgas",
     "1795737600000seasondailykillenemieswithfire",
     "1795824000000seasondailycompletemissionsecondary",
+    "1795910400000seasondailycompletemissionmelee",
     "1795996800000seasonweeklybeastslayer",
     "1795996800000seasonweeklycompleteclemmission",
     "1795996800000seasonweeklyhardfriendssurvival",
