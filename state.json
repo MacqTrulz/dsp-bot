@@ -3,17 +3,28 @@
   "baro_arrived": "5d1e07a0a38e4a4fdd7cefca:2026-11-13T14:00:00.000Z",
   "baro_upcoming": "5d1e07a0a38e4a4fdd7cefca:2026-11-27T14:00:00.000Z",
   "ev_seen": [],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1795590463,
+      "msg": "1575029800014315642"
+    }
+  ],
+  "fis_seen": [
+    "6b067657ec5028ec4cc257dc"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6b04493a24ee83c898441bbb",
     "6b047f235f36aba540276a52",
+    "6b052332001556515ea513a0",
     "6b0580f2154a946deb6bd296",
     "6b05a546b164ff935cbc89df",
     "6b05a546b164ff935cbc89e0",
     "6b05cac6fff09a537c973cea",
-    "6b06181eb702fdf67f97eebe"
+    "6b06181eb702fdf67f97eebe",
+    "6b063c72fde503c5407723ad",
+    "6b063c72fde503c5407723ae",
+    "6b06631e5c4e141f6cdfeb24"
   ],
   "news_seen": [
     "62d31b87106360aa5703954d",
