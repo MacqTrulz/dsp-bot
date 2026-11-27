@@ -5,8 +5,16 @@
   "ev_seen": [
     "6b05a1c3b7d5bb407d34cc58"
   ],
-  "fis_alerts": [],
-  "fis_seen": [],
+  "fis_alerts": [
+    {
+      "exp": 1795782445,
+      "msg": "1575845025038737439"
+    }
+  ],
+  "fis_seen": [
+    "6b0967da7587e98a820cd8d2",
+    "6b0967da7587e98a820cd8d3"
+  ],
   "fissure_msg": "1569398051095716057",
   "inv_seen": [
     "6b052332001556515ea513a0",
