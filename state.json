@@ -1,22 +1,17 @@
 {
   "archon": "6b037e7e26fb9a9750b1c4d8",
-  "baro_arrived": "5d1e07a0a38e4a4fdd7cefca:2026-11-13T14:00:00.000Z",
+  "baro_arrived": "5d1e07a0a38e4a4fdd7cefca:2026-11-27T14:00:00.000Z",
   "baro_upcoming": "5d1e07a0a38e4a4fdd7cefca:2026-11-27T14:00:00.000Z",
   "ev_seen": [
     "6b05a1c3b7d5bb407d34cc58"
   ],
   "fis_alerts": [
     {
-      "exp": 1795788604,
-      "msg": "1575850029619609735"
-    },
-    {
       "exp": 1795792592,
       "msg": "1575867660502179861"
     }
   ],
   "fis_seen": [
-    "6b097626c8e66da7512ed27b",
     "6b09868ede588cc6ceb6fae3"
   ],
   "fissure_msg": "1569398051095716057",
